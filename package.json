@@ -1,0 +1,10 @@
+{
+  "name": "purdue-diet-optimizer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Web app for planning daily meals, hydration, and supplement timing around Purdue dining menus.",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check lib/purdueMenuClient.js && node --check lib/planner.js && node --check public/app.js"
+  }
+}

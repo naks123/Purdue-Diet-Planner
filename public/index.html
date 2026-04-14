@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Purdue Diet Optimizer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-a"></div>
+    <div class="ambient ambient-b"></div>
+    <main class="shell">
+      <section class="hero panel">
+        <p class="eyebrow">Purdue Fuel Planner</p>
+        <div class="hero-grid">
+          <div>
+            <h1>Build your day around the menu, not guesswork.</h1>
+            <p class="lede">
+              Pull in Purdue dining data, translate it into a daily eating rhythm, and keep hydration and supplements timed around class, training, and recovery.
+            </p>
+            <div class="hero-metrics" id="heroMetrics"></div>
+          </div>
+          <div class="hero-card">
+            <p class="mini-label">Planner stance</p>
+            <ul class="stance-list">
+              <li>High-protein, schedule-aware meal picks</li>
+              <li>Water checkpoints adjusted to body weight and training load</li>
+              <li>Conservative supplement timing with medical caveats surfaced</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <form class="panel controls" id="plannerForm">
+          <div class="section-head">
+            <h2>Profile</h2>
+            <button type="submit" class="action">Generate Today’s Plan</button>
+          </div>
+
+          <div class="field-grid">
+            <label>
+              <span>Menu date</span>
+              <input name="menuDate" type="date" />
+            </label>
+            <label>
+              <span>Dining court scope</span>
+              <select name="courtName">
+                <option value="all-residential" selected>All residential courts</option>
+                <option value="Wiley">Wiley</option>
+                <option value="Ford">Ford</option>
+                <option value="Earhart">Earhart</option>
+                <option value="Hillenbrand">Hillenbrand</option>
+                <option value="Windsor">Windsor</option>
+              </select>
+            </label>
+            <label>
+              <span>Name</span>
+              <input name="name" value="Boilermaker" />
+            </label>
+            <label>
+              <span>Goal</span>
+              <select name="goal">
+                <option value="fat-loss">Fat loss</option>
+                <option value="maintain" selected>Maintain</option>
+                <option value="lean-bulk">Lean bulk</option>
+              </select>
+            </label>
+            <label>
+              <span>Weight (lb)</span>
+              <input name="weightLb" type="number" min="90" max="350" value="178" />
+            </label>
+            <label>
+              <span>Height (in)</span>
+              <input name="heightIn" type="number" min="48" max="90" value="71" />
+            </label>
+            <label>
+              <span>Wake time</span>
+              <input name="wakeTime" type="time" value="07:30" />
+            </label>
+            <label>
+              <span>Sleep time</span>
+              <input name="sleepTime" type="time" value="23:30" />
+            </label>
+            <label>
+              <span>Training load</span>
+              <select name="trainingLoad">
+                <option value="low">Low</option>
+                <option value="moderate" selected>Moderate</option>
+                <option value="high">High</option>
+              </select>
+            </label>
+            <label>
+              <span>Dietary style</span>
+              <input name="dietaryStyle" value="high-protein omnivore" />
+            </label>
+          </div>
+
+          <fieldset class="supplement-box">
+            <legend>Meals to plan</legend>
+            <label><input type="checkbox" name="selectedMeals" value="Breakfast" checked /> Breakfast</label>
+            <label><input type="checkbox" name="selectedMeals" value="Lunch" checked /> Lunch</label>
+            <label><input type="checkbox" name="selectedMeals" value="Snack" checked /> Snack</label>
+            <label><input type="checkbox" name="selectedMeals" value="Dinner" checked /> Dinner</label>
+          </fieldset>
+
+          <fieldset class="supplement-box">
+            <legend>Supplements to include</legend>
+            <label><input type="checkbox" name="supplements" value="creatine" checked /> Creatine</label>
+            <label><input type="checkbox" name="supplements" value="vitamin-d" checked /> Vitamin D3</label>
+            <label><input type="checkbox" name="supplements" value="omega-3" checked /> Omega-3</label>
+            <label><input type="checkbox" name="supplements" value="magnesium" checked /> Magnesium</label>
+            <label><input type="checkbox" name="supplements" value="caffeine" /> Caffeine</label>
+          </fieldset>
+
+          <p class="disclaimer">
+            Menu names, ingredients, traits, and nutrition facts are pulled from Purdue Dining's official live data source behind Menus Online.
+          </p>
+          <p class="disclaimer">
+            The supplement panel is for scheduling only. This app is not a diagnosis tool and should not replace personalized medical or dietitian guidance.
+          </p>
+        </form>
+
+        <section class="results">
+          <div class="panel snapshot" id="snapshot"></div>
+          <div class="panel">
+            <div class="section-head">
+              <h2>Meal schedule</h2>
+              <p id="menuSource"></p>
+            </div>
+            <div class="schedule" id="mealSchedule"></div>
+          </div>
+          <div class="panel split-grid">
+            <div>
+              <div class="section-head">
+                <h2>Hydration</h2>
+              </div>
+              <div id="hydrationPlan"></div>
+            </div>
+            <div>
+              <div class="section-head">
+                <h2>Supplements</h2>
+              </div>
+              <div id="supplementPlan"></div>
+            </div>
+          </div>
+          <div class="panel notes-panel">
+            <div class="section-head">
+              <h2>Planner notes</h2>
+            </div>
+            <ul id="plannerNotes"></ul>
+          </div>
+        </section>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+  </html>
